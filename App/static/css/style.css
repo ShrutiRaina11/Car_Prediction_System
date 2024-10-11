@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #2C3E50;
+}
+
+.bg-dark {
+  background-color: #34495E !important;
+}
+
+.card {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  border: none;
+}
+
+.card-header {
+  background-color: rgb(10 9 235 / 45%) !important;
+  border-radius: 10px 10px 0 0;
+}
+
+h1, h5 {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+form {
+  margin-top: 20px;
+}
+
+form .form-control {
+  border-radius: 8px;
+}
+
+button {
+  border-radius: 8px;
+}
+
+h4 {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+  }
+}
