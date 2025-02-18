@@ -10,34 +10,26 @@ class MyModel:
     self.bais = 0.
 
   def compute_gradient(self,X, y, w, b): 
-    dj_dw = np.zeros((self.n,))
-    dj_db = 0.
-
-    errors = np.dot(X, w) + b - y  # Calculate errors for all samples
-    dj_dw = np.dot(errors, X)      # Calculate gradient for weights
-    dj_db = np.sum(errors)         # Calculate gradient for bias             
-    dj_dw = dj_dw / self.m                                
-    dj_db = dj_db / self.m                                
-        
-    return dj_db, dj_dw
+    dz = np.dot(w,X) + b - y           # Calculate derivative for all samples
+    dw = np.dot(dz,X.T)  / self.m     # Calculate gradient for weights
+    db = np.sum(dz)   / self.m       # Calculate gradient for bias                                             
+    return db, dw
   
-  def fit(self, X, y): 
-    
-    self.m,self.n = X.shape
-    w = np.zeros(self.n)  #avoid modifying global w within function
-    b = 0.
+  def fit(self, X, y):     
+    X = X.T
+    self.n,self.m = X.shape
+    w = np.zeros((1,self.n))  #avoid modifying global w within function
+    b = 0. #avoid modifying global b within function
     for i in range(self.max_iter):
-
       # Calculate the gradient and update the parameters
-      dj_db,dj_dw = self.compute_gradient(X, y, w, b)   
-
+      db,dw = self.compute_gradient(X, y, w, b)   
       # Update Parameters using w, b, alpha and gradient
-      w -= self.alpha * dj_dw              
-      b -= self.alpha * dj_db            
-    
+      w -= self.alpha * dw              
+      b -= self.alpha * db                
     self.weight = w # final w
     self.bais = b # final b
 
-  def predict(self,x): 
-    p = np.dot(x, self.weight) + self.bais     
+  def predict(self,X): 
+    X = X.T
+    p = np.dot(self.weight, X) + self.bais     
     return p
